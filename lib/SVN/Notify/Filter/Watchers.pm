@@ -22,16 +22,15 @@ Fake out Test::Pod::Coverage.
 
 =head1 NAME
 
-SVN::Notify::Filter::Watchers - Subscribe to SVN::Notify commits with
-a Subversion property.
+SVN::Notify::Filter::Watchers - Subscribe to SVN::Notify commits with a Subversion property.
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 SYNOPSIS
 

@@ -10,7 +10,7 @@ WriteMakefile(
     PL_FILES            => {},
     PREREQ_PM => {
         'Test::More' => 0,
-	'SVN::Notify' => 2.7.1,
+	'SVN::Notify' => "2.7.1",
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'SVN-Notify-Filter-Watchers-*' },

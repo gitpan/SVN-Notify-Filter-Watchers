@@ -1,5 +1,9 @@
 Revision history for SVN-Notify-Filter-Watchers
 
-0.01    Date/time
+0.01   April 18, 2008
         First version, released on an unsuspecting world.
+
+0.02   April 18, 2008
+        Fixed Makefile.PL for META.yml
+        Fixed Abstract section.
 
