@@ -1,0 +1,15 @@
+--- #YAML:1.0
+name:                SVN-Notify-Filter-Watchers
+version:             0.01
+abstract:            Subscribe to SVN::Notify commits with
+license:             ~
+author:              
+    - Larry Shatzer, Jr. <larrysh@cpan.org>
+generated_by:        ExtUtils::MakeMaker version 6.44
+distribution_type:   module
+requires:     
+    SVN::Notify:                   
+    Test::More:                    0
+meta-spec:
+    url:     http://module-build.sourceforge.net/META-spec-v1.3.html
+    version: 1.3
