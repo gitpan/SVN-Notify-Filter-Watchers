@@ -26,11 +26,11 @@ SVN::Notify::Filter::Watchers - Subscribe to SVN::Notify commits with a Subversi
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 SYNOPSIS
 
@@ -67,7 +67,9 @@ This filter will walk up the path to root for each path entry that has
 changed and add recipients if the watcher property has been set. This
 way you can in effect set the property on C</trunk> and get ALL
 commits that happen below C</trunk>. When an path has been deleted it
-will check the previous revision for the watcher property.
+will check the previous revision for the watcher property. You can
+also set C<skip_walking_up> (C<--skip-walking-up>) to stop this
+behavior.
 
 By default the filter will then walk down the path of a deleted path
 and check for recipients to add. This behavior can be changed by adding
@@ -75,8 +77,10 @@ setting C<skip_deleted_paths> (or C<--skip-deleted-paths>).
 
 =cut
 
-SVN::Notify->register_attributes( watcher_property => 'watcher-property=s' );
-SVN::Notify->register_attributes( skip_deleted_paths => 'skip-deleted-paths' );
+SVN::Notify->register_attributes( watcher_property   => 'watcher-property=s', 
+				  skip_deleted_paths => 'skip-deleted-paths',
+				  skip_walking_up    => 'skip-walking-up',
+ );
 
 my %seen;
 my $defaultsvnproperty = "svnx:watchers";
@@ -95,8 +99,10 @@ sub recipients {
 		$seen{$file} = 1;
 		push(@$to, _get_watchers($self, $file, $revision));
 	    }
-	    my $parent = _parent($file);
-	    push(@$to, _walk_up($self, $parent));
+	    if(!$self->skip_walking_up) {
+		my $parent = _parent($file);
+		push(@$to, _walk_up($self, $parent));
+	    }
 	    if($key eq "D") {
 		if(!$self->skip_deleted_paths) {
 		    my $fh = $self->_pipe(

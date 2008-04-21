@@ -7,4 +7,5 @@ t/00-load.t
 t/pod-coverage.t
 t/boilerplate.t
 t/pod.t
+t/base.t
 META.yml                                 Module meta-data (added by MakeMaker)

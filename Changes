@@ -7,3 +7,6 @@ Revision history for SVN-Notify-Filter-Watchers
         Fixed Makefile.PL for META.yml
         Fixed Abstract section.
 
+0.03   April 20, 2008
+	Added --skip-walking-up to avoid walking up the path.
+        Added the start of simple tests.
