@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                SVN-Notify-Filter-Watchers
-version:             0.03
+version:             0.04
 abstract:            Subscribe to SVN::Notify commits with a Subversion property.
 license:             ~
 author:              

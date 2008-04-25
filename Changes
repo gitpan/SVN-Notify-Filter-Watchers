@@ -10,3 +10,7 @@ Revision history for SVN-Notify-Filter-Watchers
 0.03   April 20, 2008
 	Added --skip-walking-up to avoid walking up the path.
         Added the start of simple tests.
+
+0.04   April 25, 2008
+	Fixed a few bugs while walking up the path.
+	Thanks to Jeff Mitchell for reporting the problem.

@@ -26,11 +26,11 @@ SVN::Notify::Filter::Watchers - Subscribe to SVN::Notify commits with a Subversi
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 =head1 SYNOPSIS
 
@@ -100,8 +100,7 @@ sub recipients {
 		push(@$to, _get_watchers($self, $file, $revision));
 	    }
 	    if(!$self->skip_walking_up) {
-		my $parent = _parent($file);
-		push(@$to, _walk_up($self, $parent));
+		push(@$to, _walk_up($self, _parent($file)));
 	    }
 	    if($key eq "D") {
 		if(!$self->skip_deleted_paths) {
@@ -135,23 +134,22 @@ sub _walk_up {
     my $self = shift;
     my $file = shift;
     my $revision = $self->{revision};
-    if($file eq _parent($file)) {
-	return;
-    }
-    if($seen{$file}) {
-	_walk_up($self, _parent($file));
-    } else {
+    my @watchers;
+    if(!$seen{$file}) {
 	if(_has_watcher_property($self, $file, $revision)) {
 	    $seen{$file} = 1;
-	    my @watchers = _get_watchers($self, $file, $revision);
-	    return @watchers;
+	    push(@watchers, _get_watchers($self, $file, $revision));
 	}
     }
+    if($file ne _parent($file)) {
+        push(@watchers, _walk_up($self, _parent($file)));   
+    }
+    return @watchers;
 }
 
 sub _parent {
     my $file = shift;
-    $file =~ m/^(.*?)\/.*$/;
+    $file =~ m/^(.*)\/.*$/;
     if (defined($1)) {
 	return $1;
     } else {
