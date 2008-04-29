@@ -8,7 +8,7 @@ use SVN::Notify;
 
 Fake out Test::Pod::Coverage.
 
-=head3 recipients
+=head3 post_prepare
 
 =head3 _walk_up
 
@@ -26,11 +26,11 @@ SVN::Notify::Filter::Watchers - Subscribe to SVN::Notify commits with a Subversi
 
 =head1 VERSION
 
-Version 0.04
+Version 0.05
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 =head1 SYNOPSIS
 
@@ -75,19 +75,29 @@ By default the filter will then walk down the path of a deleted path
 and check for recipients to add. This behavior can be changed by adding
 setting C<skip_deleted_paths> (or C<--skip-deleted-paths>).
 
+Since this is just a filter, there are certain behaviors we can't control, such 
+as not requiring at least on C<--to> address. Unless you have some addresses 
+that should get all commits, regardless of the watcher property, you may want to 
+set the C<--to> to some address that goes to C</dev/null> or does not bounce. 
+However, if you set C<trim_original_to> (C<--trim-original-to>), it will remove 
+the C<--to> addresses before it finds all the watcher properties.
+
 =cut
 
 SVN::Notify->register_attributes( watcher_property   => 'watcher-property=s', 
 				  skip_deleted_paths => 'skip-deleted-paths',
 				  skip_walking_up    => 'skip-walking-up',
+				  trim_original_to   => 'trim-original-to',
  );
 
 my %seen;
 my $defaultsvnproperty = "svnx:watchers";
 
-sub recipients {
+sub post_prepare {
     my ($self, $to) = @_;
-    $self->prepare_files;
+    if($self->trim_original_to) {
+        $self->{to} = \();
+    }
     my $files_ref = $self->{files};
     my $svnproperty = $self->watcher_property || $defaultsvnproperty;
     foreach my $key (keys(%$files_ref)) {

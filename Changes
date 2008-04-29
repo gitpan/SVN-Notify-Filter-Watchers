@@ -14,3 +14,7 @@ Revision history for SVN-Notify-Filter-Watchers
 0.04   April 25, 2008
 	Fixed a few bugs while walking up the path.
 	Thanks to Jeff Mitchell for reporting the problem.
+
+0.05   April 29, 2008
+	Added --trim-original-to to clear any --to passed in
+	Now require 2.72 SVN::Notify for post_prepare filter
