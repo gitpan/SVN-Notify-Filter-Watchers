@@ -18,3 +18,6 @@ Revision history for SVN-Notify-Filter-Watchers
 0.05   April 29, 2008
 	Added --trim-original-to to clear any --to passed in
 	Now require 2.72 SVN::Notify for post_prepare filter
+
+0.06   May 05, 2008
+	Fixed trim_original_to

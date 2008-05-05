@@ -26,11 +26,11 @@ SVN::Notify::Filter::Watchers - Subscribe to SVN::Notify commits with a Subversi
 
 =head1 VERSION
 
-Version 0.05
+Version 0.06
 
 =cut
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 =head1 SYNOPSIS
 
@@ -96,7 +96,7 @@ my $defaultsvnproperty = "svnx:watchers";
 sub post_prepare {
     my ($self, $to) = @_;
     if($self->trim_original_to) {
-        $self->{to} = \();
+        @{$self->{to}} = ("");
     }
     my $files_ref = $self->{files};
     my $svnproperty = $self->watcher_property || $defaultsvnproperty;
