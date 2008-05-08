@@ -21,3 +21,8 @@ Revision history for SVN-Notify-Filter-Watchers
 
 0.06   May 05, 2008
 	Fixed trim_original_to
+
+0.07   May 08, 2008
+	Instead of trying to return the recipients, since we
+	are now running under post_prepare, modify
+	$self->{to} with the result.
