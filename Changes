@@ -26,3 +26,8 @@ Revision history for SVN-Notify-Filter-Watchers
 	Instead of trying to return the recipients, since we
 	are now running under post_prepare, modify
 	$self->{to} with the result.
+
+0.08   May 08, 2008
+	Make sure not to ignore $self->{to} when
+	trim_originakl_to is not set. Also, add some much
+	needed tests for this area of the code.
