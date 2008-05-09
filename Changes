@@ -29,5 +29,9 @@ Revision history for SVN-Notify-Filter-Watchers
 
 0.08   May 08, 2008
 	Make sure not to ignore $self->{to} when
-	trim_originakl_to is not set. Also, add some much
+	trim_original_to is not set. Also, add some much
 	needed tests for this area of the code.
+
+0.09   May 09, 2008
+	Copy some test infrastructure from SVN::Notify to
+	help with tests on Cygwin.

@@ -26,11 +26,11 @@ SVN::Notify::Filter::Watchers - Subscribe to SVN::Notify commits with a Subversi
 
 =head1 VERSION
 
-Version 0.08
+Version 0.09
 
 =cut
 
-our $VERSION = '0.08';
+our $VERSION = '0.09';
 
 =head1 SYNOPSIS
 

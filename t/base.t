@@ -1,7 +1,12 @@
 use strict;
-#use warnings;
+use warnings;
 
 use Test::More tests => 9;
+use File::Spec::Functions;
+my $ext = $^O eq 'MSWin32' ? '.bat' : '';
+
+my $dir = catdir curdir, 't', 'scripts';
+$dir = catdir curdir, 't', 'bin' unless -d $dir;
 
 BEGIN {
   use_ok 'SVN::Notify::Filter::Watchers' or die;
@@ -9,6 +14,7 @@ BEGIN {
 
 isa_ok my $n1 = SVN::Notify->new(
        to => ['you@example.com'],
+       sendmail   => catfile($dir, "testsendmail$ext"),
        repos_path => '/foo/bar',
        revision => '42',
        filters => [ 'Watchers' ],
@@ -16,6 +22,7 @@ isa_ok my $n1 = SVN::Notify->new(
 
 isa_ok my $n2 = SVN::Notify->new(
        to => ['you@example.com'],
+       sendmail   => catfile($dir, "testsendmail$ext"),
        repos_path => '/foo/bar',
        revision   => '42',
        filters   => [ 'Watchers' ],
@@ -32,6 +39,7 @@ is_deeply($n2->{to}, ['you@example.com'], "Checking --to exists");
 
 isa_ok my $n3 = SVN::Notify->new(
        to => ['1@example.com'],
+       sendmail   => catfile($dir, "testsendmail$ext"),
        repos_path => '/foo/bar',
        revision => '42',
        filters => [ 'Watchers' ],

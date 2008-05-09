@@ -11,6 +11,7 @@ WriteMakefile(
     PREREQ_PM => {
         'Test::More' => 0,
 	'SVN::Notify' => "2.72",
+	'File::Spec' => 0,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'SVN-Notify-Filter-Watchers-*' },
