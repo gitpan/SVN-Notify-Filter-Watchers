@@ -35,3 +35,6 @@ Revision history for SVN-Notify-Filter-Watchers
 0.09   May 09, 2008
 	Copy some test infrastructure from SVN::Notify to
 	help with tests on Cygwin.
+
+0.10 March 03, 2010
+	Fix problem with property on root directory.

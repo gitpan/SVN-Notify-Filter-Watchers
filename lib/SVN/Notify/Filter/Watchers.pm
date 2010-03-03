@@ -30,7 +30,7 @@ Version 0.09
 
 =cut
 
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 
 =head1 SYNOPSIS
 
@@ -75,16 +75,16 @@ By default the filter will then walk down the path of a deleted path
 and check for recipients to add. This behavior can be changed by adding
 setting C<skip_deleted_paths> (or C<--skip-deleted-paths>).
 
-Since this is just a filter, there are certain behaviors we can't control, such 
-as not requiring at least on C<--to> address. Unless you have some addresses 
-that should get all commits, regardless of the watcher property, you may want to 
-set the C<--to> to some address that goes to C</dev/null> or does not bounce. 
-However, if you set C<trim_original_to> (C<--trim-original-to>), it will remove 
+Since this is just a filter, there are certain behaviors we can't control, such
+as not requiring at least on C<--to> address. Unless you have some addresses
+that should get all commits, regardless of the watcher property, you may want to
+set the C<--to> to some address that goes to C</dev/null> or does not bounce.
+However, if you set C<trim_original_to> (C<--trim-original-to>), it will remove
 the C<--to> addresses before it finds all the watcher properties.
 
 =cut
 
-SVN::Notify->register_attributes( watcher_property   => 'watcher-property=s', 
+SVN::Notify->register_attributes( watcher_property   => 'watcher-property=s',
 				  skip_deleted_paths => 'skip-deleted-paths',
 				  skip_walking_up    => 'skip-walking-up',
 				  trim_original_to   => 'trim-original-to',
@@ -151,18 +151,18 @@ sub _walk_up {
 	}
     }
     if($file ne _parent($file)) {
-        push(@watchers, _walk_up($self, _parent($file)));   
+        push(@watchers, _walk_up($self, _parent($file)));
     }
     return @watchers;
 }
 
 sub _parent {
     my $file = shift;
-    $file =~ m/^(.*)\/.*$/;
-    if (defined($1)) {
+    $file =~ m/^(.*)\//;
+    if (defined($1) && length($1)) {
 	return $1;
     } else {
-	return $file;
+	return '/';
     }
 }
 
@@ -268,7 +268,7 @@ David Wheeler for L<SVN::Notify|SVN::Notify>.
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2008 Larry Shatzer, Jr., all rights reserved.
+Copyright 2008-2010 Larry Shatzer, Jr., all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
